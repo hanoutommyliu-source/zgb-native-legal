@@ -13,3 +13,8 @@ https://hanoutommyliu-source.github.io/zgb-native-legal/documentation/
 Live Privacy URL:
 
 https://hanoutommyliu-source.github.io/zgb-native-legal/privacy/
+
+OAuth redirect URLs:
+
+- Production: https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/production/callback/
+- Development: https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/development/callback/

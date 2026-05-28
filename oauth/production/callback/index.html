@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZGB Native OAuth Redirect</title>
+    <meta name="robots" content="noindex">
+    <style>
+      body {
+        color: #17202a;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      main {
+        margin: 0 auto;
+        padding: 56px 20px;
+        width: min(680px, 100%);
+      }
+
+      a {
+        color: #0b5cad;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Returning to ZGB Native</h1>
+      <p>This page forwards the Zoom authorization response to the local ZGB Native backend running on this Mac.</p>
+      <p>If you are not redirected automatically, make sure ZGB Native's local backend is running, then use this link:</p>
+      <p><a id="fallback" href="http://127.0.0.1:8787/auth/zoom/callback">Continue to ZGB Native</a></p>
+    </main>
+    <script>
+      const localCallback = "http://127.0.0.1:8787/auth/zoom/callback" + window.location.search + window.location.hash;
+      document.getElementById("fallback").href = localCallback;
+      window.location.replace(localCallback);
+    </script>
+  </body>
+</html>
