@@ -14,6 +14,10 @@ Live Privacy URL:
 
 https://hanoutommyliu-source.github.io/zgb-native-legal/privacy/
 
+Review build download:
+
+https://github.com/hanoutommyliu-source/zgb-native-legal/releases/download/v0.1.0-review/ZGB-0.1.0-review.zip
+
 OAuth redirect URLs:
 
 - Production: https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/production/callback/
