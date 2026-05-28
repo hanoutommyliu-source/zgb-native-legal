@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZGB Native Documentation</title>
+    <meta name="description" content="Documentation for adding, using, troubleshooting, and removing ZGB Native for Zoom.">
+    <style>
+      :root {
+        color-scheme: light;
+        --text: #17202a;
+        --muted: #5d6877;
+        --rule: #d8dee8;
+        --link: #0b5cad;
+        --bg: #ffffff;
+        --soft: #f6f8fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(860px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 56px 0 72px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--rule);
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 34px;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 36px 0 10px;
+        font-size: 23px;
+        line-height: 1.3;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 26px 0 8px;
+        font-size: 18px;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+
+      p, li {
+        font-size: 16px;
+      }
+
+      p {
+        margin: 0 0 16px;
+      }
+
+      ul, ol {
+        margin: 0 0 18px;
+        padding-left: 24px;
+      }
+
+      a {
+        color: var(--link);
+      }
+
+      code {
+        background: var(--soft);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        padding: 1px 5px;
+      }
+
+      .updated {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .note {
+        background: var(--soft);
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        margin: 20px 0;
+        padding: 16px 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>ZGB Native Documentation</h1>
+        <p class="updated">Last updated: May 28, 2026</p>
+      </header>
+
+      <p>ZGB Native, also known as Zoom Game Broadcaster, is a macOS app for preparing timed Zoom breakout-room broadcast messages and sending them from a queue during a Zoom meeting.</p>
+
+      <h2>Prerequisites</h2>
+      <ul>
+        <li>macOS 14.0 or later.</li>
+        <li>A Zoom account authorized for the ZGB Native Marketplace app.</li>
+        <li>A Zoom meeting where the signed-in Zoom user has permission to join and broadcast to breakout rooms.</li>
+        <li>Host, co-host, administrator, or equivalent Zoom permissions for the meeting actions being used.</li>
+        <li>Network access to Zoom services.</li>
+      </ul>
+
+      <h2>Adding the App</h2>
+      <h3>Install ZGB Native on macOS</h3>
+      <ol>
+        <li>Download the ZGB Native package from the link provided by the app publisher or Zoom Marketplace reviewer instructions.</li>
+        <li>Unzip the package.</li>
+        <li>Move <code>ZGB.app</code> to <code>/Applications</code>.</li>
+        <li>Open <code>ZGB.app</code>.</li>
+        <li>If macOS asks for confirmation because the app was downloaded from the internet, approve opening the app.</li>
+      </ol>
+
+      <h3>Authorize the Zoom App</h3>
+      <ol>
+        <li>Open ZGB Native.</li>
+        <li>In the Zoom setup area, choose OAuth backend mode if it is not already selected.</li>
+        <li>Click <strong>Sign in with Zoom</strong>.</li>
+        <li>Complete the Zoom authorization flow in the browser.</li>
+        <li>Return to ZGB Native after the browser reports that sign-in is complete.</li>
+      </ol>
+
+      <p class="note">Troubleshooting link: see the <a href="#troubleshooting">Troubleshooting</a> section on this page for authorization, account, meeting join, and breakout broadcast issues.</p>
+
+      <h2>Usage</h2>
+      <h3>Join a Zoom Meeting</h3>
+      <p><strong>Use case:</strong> connect ZGB Native to the active Zoom session where the host will run broadcast prompts.</p>
+      <p><strong>Prerequisites:</strong> the user must have an authorized Zoom account, a valid meeting number, the meeting passcode if required, and permission to join the meeting.</p>
+      <ol>
+        <li>Open ZGB Native.</li>
+        <li>Enter the Zoom meeting number.</li>
+        <li>Enter the meeting passcode if required.</li>
+        <li>Click <strong>Join Meeting</strong>.</li>
+        <li>Wait for the app to show that it has joined or is ready for Zoom breakout-room delivery.</li>
+      </ol>
+
+      <h3>Prepare Broadcast Messages</h3>
+      <p><strong>Use case:</strong> build a set of prompts, game instructions, or classroom cues before sending them during a live meeting.</p>
+      <p><strong>Prerequisites:</strong> no active Zoom meeting is required to prepare messages. A Zoom meeting is required only when sending messages to breakout rooms.</p>
+      <ul>
+        <li>Type a single message in the broadcast composer and choose a delay.</li>
+        <li>Paste a timed list into the import area. ZGB Native parses timings such as <code>30 sec</code>, <code>2 min</code>, or bracketed timing at the end of lines.</li>
+        <li>Review, reorder, delete, or expand individual queue entries before running the queue.</li>
+      </ul>
+
+      <h3>Run the Timed Queue</h3>
+      <p><strong>Use case:</strong> send a sequence of timed prompts to Zoom breakout rooms without manually tracking every cue.</p>
+      <p><strong>Prerequisites:</strong> ZGB Native must be joined to the Zoom meeting, breakout rooms must be available, and the signed-in user must have the Zoom permissions required to broadcast to breakout rooms.</p>
+      <ol>
+        <li>Add or import queue messages.</li>
+        <li>Review each message and delay.</li>
+        <li>Click <strong>Run queue</strong> to send queued messages on their configured delays.</li>
+        <li>Use <strong>Stop queue</strong> to cancel the active run.</li>
+      </ol>
+
+      <h3>Send a Specific Queue Item</h3>
+      <p><strong>Use case:</strong> restart from a selected prompt or manually send one item during a live session.</p>
+      <p><strong>Prerequisites:</strong> the app must be joined to the Zoom meeting and the user must have permission to send breakout-room broadcasts.</p>
+      <ol>
+        <li>Expand the queue item.</li>
+        <li>Click <strong>Send now</strong> on that item.</li>
+        <li>Confirm the app labels the message as delivered to Zoom breakouts or reports a visible error.</li>
+      </ol>
+
+      <h3>Save and Load Session Plans</h3>
+      <p><strong>Use case:</strong> reuse a prepared set of game, class, workshop, or facilitation prompts across sessions.</p>
+      <p><strong>Prerequisites:</strong> saved plans are stored locally on the user's Mac. iCloud availability depends on the user's macOS and iCloud configuration.</p>
+      <ul>
+        <li>Save a queue as a session plan when you want to reuse it later.</li>
+        <li>Load a saved plan from the session plan list.</li>
+        <li>Use the Load Queue flow to select reusable queue files when available.</li>
+      </ul>
+
+      <h3>View Recent Broadcasts</h3>
+      <p><strong>Use case:</strong> inspect recent messages sent from the app for session continuity or troubleshooting.</p>
+      <p><strong>Prerequisites:</strong> recent broadcast records exist only after messages have been sent from ZGB Native on that Mac.</p>
+      <ul>
+        <li>Open the recent broadcasts area.</li>
+        <li>Review previous message text, timing, and delivery status shown by the app.</li>
+      </ul>
+
+      <h2 id="troubleshooting">Troubleshooting</h2>
+      <ul>
+        <li>If authorization uses the wrong Zoom account, click <strong>Change Zoom Account</strong>, finish the browser sign-out, then click <strong>Sign in with Zoom</strong> again.</li>
+        <li>If Zoom says the application is not found, make sure the Zoom account is allowed to authorize the unpublished or review app.</li>
+        <li>If joining fails, verify the meeting number, passcode, account authorization, and host permissions.</li>
+        <li>If breakout broadcast fails, verify that breakout rooms are enabled and that the signed-in user has host, co-host, administrator, or other permissions required by Zoom.</li>
+        <li>If local backend mode is used, confirm that the backend is running and reachable at the configured local URL.</li>
+        <li>Do not put meeting passcodes, OAuth tokens, client secrets, or private credentials in support tickets or Marketplace comments.</li>
+      </ul>
+
+      <h2>Removing the App</h2>
+      <h3>Remove or Deauthorize from Zoom</h3>
+      <ol>
+        <li>Sign in to the Zoom App Marketplace.</li>
+        <li>Click <strong>Manage</strong>.</li>
+        <li>Open <strong>Added Apps</strong>.</li>
+        <li>Find <strong>ZGB Native</strong>.</li>
+        <li>Click <strong>Remove</strong>.</li>
+        <li>Select a removal reason if Zoom asks for one.</li>
+        <li>Confirm removal.</li>
+      </ol>
+
+      <h3>Remove the Local macOS App</h3>
+      <ol>
+        <li>Quit ZGB Native.</li>
+        <li>Delete <code>/Applications/ZGB.app</code>.</li>
+        <li>If local backend mode was used, delete local backend token storage from the backend data directory.</li>
+      </ol>
+
+      <h3>Implications of Deauthorization</h3>
+      <ul>
+        <li>ZGB Native will no longer be authorized to use the removed Zoom account.</li>
+        <li>The app must be authorized again before it can join meetings through Zoom or send breakout-room broadcasts.</li>
+        <li>Previously saved local queues, saved plans, and recent broadcast records may remain on the user's Mac until the user deletes the local app data.</li>
+      </ul>
+
+      <h3>Data Handling After Removal</h3>
+      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and Zoom configuration locally on the user's Mac. In OAuth backend mode, Zoom OAuth tokens may be stored locally by the backend. Deauthorizing the app in Zoom prevents future Zoom access for that account. Deleting the local app and backend token storage removes the local app installation and local authorization token data from that Mac.</p>
+
+      <h2>Support</h2>
+      <p>For support, use the developer contact email listed on the Zoom Marketplace app profile. Include the app version, macOS version, the visible error message, and whether the problem happened during authorization, meeting join, queue preparation, or breakout-room broadcast.</p>
+    </main>
+  </body>
+</html>
