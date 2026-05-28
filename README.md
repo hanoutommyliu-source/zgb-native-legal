@@ -9,3 +9,7 @@ https://hanoutommyliu-source.github.io/zgb-native-legal/terms-of-use/
 Live Documentation URL:
 
 https://hanoutommyliu-source.github.io/zgb-native-legal/documentation/
+
+Live Privacy URL:
+
+https://hanoutommyliu-source.github.io/zgb-native-legal/privacy/
