@@ -1,0 +1,34 @@
+ZGB Native DAST/TLS check - 2026-05-29 Asia/Bangkok
+Local backend target: http://127.0.0.1:18787
+Public HTTPS targets: GitHub Pages legal/documentation/privacy/OAuth callback pages
+
+## Local backend /health
+{"ok":true}
+
+## Local backend unknown path
+{"error":"Not found."}
+
+## Local sign-out POST
+{"ok":true}
+
+## OAuth start redirect with dummy credentials (no secrets)
+HTTP/1.1 302 Found
+Location: https://zoom.us/oauth/authorize?response_type=code&client_id=dummy-client&redirect_uri=https%3A%2F%2Fhanoutommyliu-source.github.io%2Fzgb-native-legal%2Foauth%2Fproduction%2Fcallback%2F&scope=user%3Aread%3Atoken+user%3Aread%3Azak&state=5ac32a98f2b8674d93d7416d30cb6a82
+Date: Fri, 29 May 2026 08:46:26 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+
+## Public page HTTP status checks
+200 https://hanoutommyliu-source.github.io/zgb-native-legal/privacy/
+200 https://hanoutommyliu-source.github.io/zgb-native-legal/terms-of-use/
+200 https://hanoutommyliu-source.github.io/zgb-native-legal/documentation/
+200 https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/production/callback/
+200 https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/development/callback/
+
+## TLS 1.2 handshake check for GitHub Pages host
+subject= /CN=*.github.io
+issuer= /C=US/O=Let's Encrypt/CN=R12
+notBefore=Apr  6 23:32:36 2026 GMT
+notAfter=Jul  5 23:32:35 2026 GMT
