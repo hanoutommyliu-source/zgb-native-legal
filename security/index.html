@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>ZGB Native Security and Compliance Evidence</h1>
-    <p>Last updated: 2026-06-03</p>
+    <p>Last updated: 2026-06-05</p>
     <p>ZGB Native, also known as Zoom Game Broadcaster, is a native macOS app that helps a Zoom host prepare timed broadcast prompts and send them to Zoom breakout rooms during a meeting. The current review version is 0.1.0 build 1, bundle id <code>ai.openclaw.zoom-game-broadcaster-native</code>, minimum macOS 14.0.</p>
 
     <h2>Zoom Beta Review Requirement Map</h2>
@@ -15,12 +15,12 @@
     <ul>
       <li><strong>SSDLC evidence:</strong> see Secure Software Development Life Cycle below and the PDF evidence packet.</li>
       <li><strong>SAST scan results:</strong> Semgrep 1.164.0, 70 rules, 10 tracked Swift/JavaScript targets, 0 findings, 0 errors. Raw artifact is linked below.</li>
-      <li><strong>DAST scan results:</strong> local backend smoke checks and public HTTPS page checks. Summary artifact is linked below.</li>
+      <li><strong>DAST scan results:</strong> local backend smoke checks and public HTTPS page checks were rerun on 2026-06-05 after the token-storage update. Summary artifact is linked below.</li>
       <li><strong>Privacy Policy:</strong> public policy linked below.</li>
       <li><strong>Additional evidence:</strong> Security Policy, Incident Management and Response Policy, Vulnerability Management Procedure, and Infrastructure/Dependency Management Policy are summarized below.</li>
       <li><strong>TLS 1.2 or higher:</strong> public ZGB Native pages and evidence artifacts are served over HTTPS; TLS 1.2 handshake verification is summarized below.</li>
     </ul>
-    <p>PDF evidence packet: <a href="./zgb-security-evidence-2026-05-29.pdf">zgb-security-evidence-2026-05-29.pdf</a></p>
+    <p>PDF evidence packet: <a href="./zgb-security-evidence-2026-05-29.pdf">zgb-security-evidence-2026-05-29.pdf</a> (updated 2026-06-05 with production token non-persistence and optional local backend Keychain storage).</p>
 
     <h2>Required Beta Evidence</h2>
 
@@ -28,7 +28,8 @@
     <p>ZGB Native uses a lightweight SSDLC covering security requirements, design review, secret-handling rules, implementation controls, verification gates, release/package review, and post-release vulnerability handling. Current controls include local-only backend binding, Zoom credential minimization, public HTTPS redirect/documentation pages, source-control exclusions for secrets and tokens, and scan/build verification before Marketplace review.</p>
     <ul>
       <li>OAuth client secrets, OAuth tokens, meeting passcodes, and Zoom SDK credentials are excluded from source control, review packages, screenshots, support messages, and Marketplace comments.</li>
-      <li>The local OAuth helper binds to <code>127.0.0.1</code> only.</li>
+      <li>The production authorization flow does not persist OAuth access or refresh tokens inside the macOS app.</li>
+      <li>The optional local OAuth helper binds to <code>127.0.0.1</code> only and stores OAuth tokens in macOS Keychain.</li>
       <li>Public pages used for Marketplace documentation, privacy, terms, and OAuth redirects are served over HTTPS.</li>
       <li>Verification gates include Xcode build/tests where applicable, backend syntax checks, SAST, dependency audit, DAST smoke checks, TLS checks, and package hygiene review.</li>
     </ul>
@@ -44,24 +45,24 @@
     </ul>
 
     <h3>DAST Results</h3>
-    <p>Dynamic checks were run on 2026-05-29 against the local backend started on <code>http://127.0.0.1:18787</code> with dummy non-secret credentials and against public HTTPS ZGB Native pages.</p>
+    <p>Dynamic checks were rerun on 2026-06-05 against the local backend started on <code>http://127.0.0.1:18787</code> with dummy non-secret credentials and a temporary macOS Keychain service, and against public HTTPS ZGB Native pages.</p>
     <ul>
       <li><code>GET /health</code> returned <code>{"ok":true}</code>.</li>
       <li>Unknown path returned <code>{"error":"Not found."}</code>.</li>
       <li><code>POST /auth/zoom/sign-out</code> returned <code>{"ok":true}</code>.</li>
       <li><code>GET /auth/zoom/start</code> returned a Zoom OAuth 302 redirect using dummy non-secret credentials and the production HTTPS redirect URI.</li>
       <li>Public Privacy, Terms, Documentation, Production OAuth callback, and Development OAuth callback pages returned HTTP 200.</li>
-      <li>Artifact: <a href="./dast-2026-05-29-summary.txt">dast-2026-05-29-summary.txt</a></li>
+      <li>Artifact: <a href="./dast-2026-06-05-summary.txt">dast-2026-06-05-summary.txt</a></li>
     </ul>
 
     <h3>Privacy Policy</h3>
     <p>Privacy Policy: <a href="../privacy/">https://hanoutommyliu-source.github.io/zgb-native-legal/privacy/</a></p>
-    <p>The policy describes Zoom authorization information, meeting details, broadcast message text, queue timing, saved plans, recent broadcast records, local app configuration, local storage, OAuth token handling in backend mode, sharing with Zoom for user-directed meeting actions, retention, user choices, and contact path.</p>
+    <p>The policy describes Zoom authorization information, meeting details, broadcast message text, queue timing, saved plans, recent broadcast records, local app configuration, local storage, production authorization token non-persistence, optional local backend Keychain token handling, sharing with Zoom for user-directed meeting actions, retention, user choices, and contact path.</p>
 
     <h2>Additional Policy Evidence</h2>
 
     <h3>Security Policy</h3>
-    <p>ZGB Native's security policy covers supported version, data protection, access control, transport security, secrets management, and local logging/diagnostics posture. The app stores queue content, saved session plans, recent broadcast records, and app configuration locally on the user's Mac. Broadcast messages are sent to Zoom meeting participants only when the user chooses to send them through the app.</p>
+    <p>ZGB Native's security policy covers supported version, data protection, access control, transport security, secrets management, and local logging/diagnostics posture. The production authorization flow does not persist OAuth access or refresh tokens inside the macOS app. Optional local OAuth backend mode stores OAuth tokens in macOS Keychain. The app stores queue content, saved session plans, recent broadcast records, and app configuration locally on the user's Mac. Broadcast messages are sent to Zoom meeting participants only when the user chooses to send them through the app.</p>
 
     <h3>Incident Management and Response Policy</h3>
     <p>Security incidents are triaged, contained, investigated, remediated, verified, documented, and escalated where required. Covered incidents include exposed OAuth client secrets, Meeting SDK secrets, OAuth tokens, refresh tokens, meeting passcodes, review packages containing unintended secrets, and vulnerabilities that could expose local data or misuse Zoom permissions.</p>
@@ -70,10 +71,10 @@
     <p>Vulnerabilities may be identified through SAST, dependency audit, DAST, manual code review, user reports, Zoom Marketplace review, or developer testing. Findings are triaged by affected component, exploitability, impact on secrets/tokens/local data/Zoom authorization, and applicable mitigations. Fixes are verified with targeted build, scan, DAST, TLS, package, or manual checks.</p>
 
     <h3>Infrastructure and Dependency Management Policy</h3>
-    <p>ZGB Native consists of a native macOS SwiftUI app, a local Node.js OAuth helper backend bound to <code>127.0.0.1</code>, Zoom OAuth/API/Meeting SDK integrations, public HTTPS GitHub Pages documentation/legal/OAuth redirect pages, and a GitHub Release review package. The current backend has no third-party production npm dependencies. Node dependency audit artifact: <a href="./npm-audit-2026-05-29.json">npm-audit-2026-05-29.json</a>.</p>
+    <p>ZGB Native consists of a native macOS SwiftUI app, an optional local Node.js OAuth helper backend bound to <code>127.0.0.1</code>, Zoom OAuth/API/Meeting SDK integrations, public HTTPS GitHub Pages documentation/legal/OAuth redirect pages, and a GitHub Release review package. The current backend has no third-party production npm dependencies. Node dependency audit artifact: <a href="./npm-audit-2026-06-05.json">npm-audit-2026-06-05.json</a>.</p>
 
     <h2>TLS 1.2 or Higher</h2>
-    <p>Public ZGB Native pages are hosted on GitHub Pages over HTTPS. An OpenSSL TLS 1.2 handshake to <code>hanoutommyliu-source.github.io:443</code> succeeded on 2026-05-29. The local backend uses <code>http://127.0.0.1</code> only for loopback communication on the user's Mac; external Zoom, documentation, privacy, terms, redirect, and package-download traffic use HTTPS.</p>
+    <p>Public ZGB Native pages are hosted on GitHub Pages over HTTPS. An OpenSSL TLS 1.2 handshake to <code>hanoutommyliu-source.github.io:443</code> succeeded again on 2026-06-05. The optional local backend uses <code>http://127.0.0.1</code> only for loopback communication on the user's Mac; external Zoom, documentation, privacy, terms, redirect, and package-download traffic use HTTPS.</p>
 
     <h2>Related Public URLs</h2>
     <ul>

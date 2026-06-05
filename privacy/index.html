@@ -96,7 +96,7 @@
     <main>
       <header>
         <h1>ZGB Native Privacy Policy</h1>
-        <p class="updated">Last updated: May 28, 2026</p>
+        <p class="updated">Last updated: June 5, 2026</p>
       </header>
 
       <p>ZGB Native, also known as Zoom Game Broadcaster, is a macOS app for preparing timed Zoom breakout-room broadcast messages and sending them from a queue during a Zoom meeting. This Privacy Policy explains how the app handles information.</p>
@@ -114,16 +114,16 @@
       <p>ZGB Native uses this information to authorize with Zoom, join a user-specified Zoom meeting, prepare broadcast queues, send host-controlled breakout-room broadcast messages, store reusable session plans, and show recent broadcast history in the local app.</p>
 
       <h2>Local Storage</h2>
-      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and app configuration locally on the user's Mac. If OAuth backend mode is used, Zoom OAuth tokens may be stored locally by the backend so the app can request Zoom credentials and join meetings. The app does not intentionally include OAuth tokens, client secrets, meeting passcodes, or private credentials in app packages, source control, support messages, or Marketplace comments.</p>
+      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and app configuration locally on the user's Mac. The production authorization flow opens Zoom's hosted OAuth authorization page and does not persist OAuth access or refresh tokens inside the macOS app. If the optional local OAuth backend mode is used on macOS for development or diagnostic testing, Zoom OAuth tokens are stored by the local backend in the user's macOS Keychain so the app can request Zoom credentials and join meetings. The app does not intentionally include OAuth tokens, client secrets, meeting passcodes, or private credentials in app packages, source control, support messages, or Marketplace comments.</p>
 
       <h2>Sharing and Disclosure</h2>
       <p>ZGB Native sends meeting-related requests to Zoom as needed to authorize the app, join meetings, and perform user-directed meeting actions. Broadcast message text is sent to Zoom meeting participants only when the user chooses to send messages through the app. ZGB Native does not sell personal information.</p>
 
       <h2>Retention</h2>
-      <p>Local queues, saved plans, recent broadcast records, configuration, and locally stored OAuth tokens remain on the user's Mac until removed by the user or replaced by normal app use. Deauthorizing the app in Zoom prevents future Zoom access for that account, but it does not automatically delete local files already stored on the user's Mac.</p>
+      <p>Local queues, saved plans, recent broadcast records, configuration, and locally stored OAuth tokens remain on the user's Mac until removed by the user or replaced by normal app use. Deauthorizing the app in Zoom prevents future Zoom access for that account, but it does not automatically delete local files or Keychain items already stored on the user's Mac.</p>
 
       <h2>User Choices and Data Subject Rights</h2>
-      <p>Users may remove the app from their Zoom account through the Zoom App Marketplace, delete the local macOS app, and delete local app/backend data stored on their Mac. Users may request access, correction, deletion, restriction, objection, or portability for personal information handled by the developer by using the developer contact email listed on the Zoom Marketplace app profile. Available rights depend on applicable law and the user's location.</p>
+      <p>Users may remove the app from their Zoom account through the Zoom App Marketplace, delete the local macOS app, and delete local app/backend data stored on their Mac, including the ZGB Native OAuth token item in macOS Keychain if optional local backend mode was used. Users may request access, correction, deletion, restriction, objection, or portability for personal information handled by the developer by using the developer contact email listed on the Zoom Marketplace app profile. Available rights depend on applicable law and the user's location.</p>
 
       <h2>Security</h2>
       <p>ZGB Native is designed to keep app data local where practical and to use Zoom authorization for Zoom meeting access. Users should not share meeting passcodes, OAuth tokens, client secrets, or private credentials in support tickets or public comments.</p>

@@ -1,0 +1,28 @@
+ZGB Native DAST Smoke Summary
+Date: 2026-06-05
+
+Backend target:
+http://127.0.0.1:18787
+
+Backend environment:
+- Dummy non-secret Zoom credentials.
+- ZGB_TOKEN_STORAGE defaulted to keychain on macOS.
+- Temporary Keychain service: ai.openclaw.zgb.dast-20260605.
+
+Results:
+- GET /health returned {"ok":true}.
+- Unknown route returned {"error":"Not found."}.
+- POST /auth/zoom/sign-out returned {"ok":true}.
+- GET /auth/zoom/start returned HTTP 302 to Zoom OAuth with dummy client id, production HTTPS redirect URI, and requested user:read:token/user:read:zak scopes.
+
+Public HTTPS page checks:
+- 200 https://hanoutommyliu-source.github.io/zgb-native-legal/privacy/
+- 200 https://hanoutommyliu-source.github.io/zgb-native-legal/terms-of-use/
+- 200 https://hanoutommyliu-source.github.io/zgb-native-legal/documentation/
+- 200 https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/production/callback/
+- 200 https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/development/callback/
+
+TLS check:
+- OpenSSL TLS 1.2 handshake to hanoutommyliu-source.github.io:443 succeeded.
+- Protocol: TLSv1.2.
+- Verify return code: 0 (ok).

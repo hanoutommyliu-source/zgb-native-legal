@@ -103,7 +103,7 @@
     <main>
       <header>
         <h1>ZGB Native Documentation</h1>
-        <p class="updated">Last updated: May 28, 2026</p>
+        <p class="updated">Last updated: June 5, 2026</p>
       </header>
 
       <p>ZGB Native, also known as Zoom Game Broadcaster, is a macOS app for preparing timed Zoom breakout-room broadcast messages and sending them from a queue during a Zoom meeting.</p>
@@ -130,7 +130,6 @@
       <h3>Authorize the Zoom App</h3>
       <ol>
         <li>Open ZGB Native.</li>
-        <li>In the Zoom setup area, choose OAuth backend mode if it is not already selected.</li>
         <li>Click <strong>Authorize with Zoom</strong>.</li>
         <li>Complete the Zoom authorization flow in the browser.</li>
         <li>Return to ZGB Native after the browser reports that sign-in is complete.</li>
@@ -201,7 +200,7 @@
         <li>If Zoom says the application is not found, make sure the Zoom account is allowed to authorize the unpublished or review app.</li>
         <li>If joining fails, verify the meeting number, passcode, account authorization, and host permissions.</li>
         <li>If breakout broadcast fails, verify that breakout rooms are enabled and that the signed-in user has host, co-host, administrator, or other permissions required by Zoom.</li>
-        <li>If local backend mode is used, confirm that the backend is running and reachable at the configured local URL.</li>
+        <li>If optional local backend mode is used for development or diagnostics, confirm that the backend is running and reachable at the configured local URL.</li>
         <li>Do not put meeting passcodes, OAuth tokens, client secrets, or private credentials in support tickets or Marketplace comments.</li>
       </ul>
 
@@ -221,7 +220,7 @@
       <ol>
         <li>Quit ZGB Native.</li>
         <li>Delete <code>/Applications/ZGB.app</code>.</li>
-        <li>If local backend mode was used, delete local backend token storage from the backend data directory.</li>
+        <li>If optional local backend mode was used, delete the ZGB Native OAuth token item from macOS Keychain. The app's <strong>Change Zoom Account</strong> control also clears this token item and any legacy backend token file.</li>
       </ol>
 
       <h3>Implications of Deauthorization</h3>
@@ -232,7 +231,7 @@
       </ul>
 
       <h3>Data Handling After Removal</h3>
-      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and Zoom configuration locally on the user's Mac. In OAuth backend mode, Zoom OAuth tokens may be stored locally by the backend. Deauthorizing the app in Zoom prevents future Zoom access for that account. Deleting the local app and backend token storage removes the local app installation and local authorization token data from that Mac.</p>
+      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and Zoom configuration locally on the user's Mac. The production authorization flow does not persist OAuth access or refresh tokens inside the macOS app. In optional local OAuth backend mode on macOS, Zoom OAuth tokens are stored by the local backend in the user's macOS Keychain. Deauthorizing the app in Zoom prevents future Zoom access for that account. Deleting the local app and backend token storage removes the local app installation and local authorization token data from that Mac.</p>
 
       <h2>Support</h2>
       <p>For support, use the developer contact email listed on the Zoom Marketplace app profile. Include the app version, macOS version, the visible error message, and whether the problem happened during authorization, meeting join, queue preparation, or breakout-room broadcast.</p>
