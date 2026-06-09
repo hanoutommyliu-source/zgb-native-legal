@@ -7,20 +7,22 @@
   </head>
   <body>
     <h1>ZGB Native Security and Compliance Evidence</h1>
-    <p>Last updated: 2026-06-05</p>
+    <p>Last updated: 2026-06-09</p>
     <p>ZGB Native, also known as Zoom Game Broadcaster, is a native macOS app that helps a Zoom host prepare timed broadcast prompts and send them to Zoom breakout rooms during a meeting. The current review version is 0.1.0 build 1, bundle id <code>ai.openclaw.zoom-game-broadcaster-native</code>, minimum macOS 14.0.</p>
 
     <h2>Zoom Beta Review Requirement Map</h2>
     <p>This page is organized to address Zoom's Beta Technical Design evidence request directly: SSDLC evidence, SAST and DAST scan results, Privacy Policy, at least three additional security/compliance documents, and TLS 1.2 or higher support.</p>
     <ul>
-      <li><strong>SSDLC evidence:</strong> see Secure Software Development Life Cycle below and the PDF evidence packet.</li>
+      <li><strong>SSDLC evidence:</strong> see Secure Software Development Life Cycle below and the June 9 required-evidence PDF packet.</li>
       <li><strong>SAST scan results:</strong> Semgrep 1.164.0, 70 rules, 10 tracked Swift/JavaScript targets, 0 findings, 0 errors. Raw artifact is linked below.</li>
       <li><strong>DAST scan results:</strong> local backend smoke checks and public HTTPS page checks were rerun on 2026-06-05 after the token-storage update. Summary artifact is linked below.</li>
       <li><strong>Privacy Policy:</strong> public policy linked below.</li>
-      <li><strong>Additional evidence:</strong> Security Policy, Incident Management and Response Policy, Vulnerability Management Procedure, and Infrastructure/Dependency Management Policy are summarized below.</li>
+      <li><strong>Additional evidence:</strong> Security Policy, Incident Management and Response Policy, Vulnerability Management Procedure, and Infrastructure/Dependency Management Policy are summarized below and included in the June 9 additional-policies PDF packet.</li>
       <li><strong>TLS 1.2 or higher:</strong> public ZGB Native pages and evidence artifacts are served over HTTPS; TLS 1.2 handshake verification is summarized below.</li>
     </ul>
-    <p>PDF evidence packet: <a href="./zgb-security-evidence-2026-05-29.pdf">zgb-security-evidence-2026-05-29.pdf</a> (updated 2026-06-05 with production token non-persistence and optional local backend Keychain storage).</p>
+    <p>Required Beta evidence packet: <a href="./zgb-beta-required-evidence-2026-06-09.pdf">zgb-beta-required-evidence-2026-06-09.pdf</a> (SSDLC, SAST, DAST, Privacy Policy, and TLS 1.2+ evidence).</p>
+    <p>Additional policy evidence packet: <a href="./zgb-beta-additional-security-policies-2026-06-09.pdf">zgb-beta-additional-security-policies-2026-06-09.pdf</a> (Security Policy, Incident Management and Response Policy, Vulnerability Management Procedure, and Infrastructure/Dependency Management Policy).</p>
+    <p>Prior evidence packet retained for audit trail: <a href="./zgb-security-evidence-2026-05-29.pdf">zgb-security-evidence-2026-05-29.pdf</a> (updated 2026-06-05 with production token non-persistence and local backend Keychain storage).</p>
 
     <h2>Required Beta Evidence</h2>
 
@@ -29,7 +31,7 @@
     <ul>
       <li>OAuth client secrets, OAuth tokens, meeting passcodes, and Zoom SDK credentials are excluded from source control, review packages, screenshots, support messages, and Marketplace comments.</li>
       <li>The production authorization flow does not persist OAuth access or refresh tokens inside the macOS app.</li>
-      <li>The optional local OAuth helper binds to <code>127.0.0.1</code> only and stores OAuth tokens in macOS Keychain.</li>
+      <li>The local OAuth helper binds to <code>127.0.0.1</code> only and stores OAuth tokens in macOS Keychain when used.</li>
       <li>Public pages used for Marketplace documentation, privacy, terms, and OAuth redirects are served over HTTPS.</li>
       <li>Verification gates include Xcode build/tests where applicable, backend syntax checks, SAST, dependency audit, DAST smoke checks, TLS checks, and package hygiene review.</li>
     </ul>
@@ -78,7 +80,9 @@
 
     <h2>Related Public URLs</h2>
     <ul>
-      <li><a href="./zgb-security-evidence-2026-05-29.pdf">PDF evidence packet</a></li>
+      <li><a href="./zgb-beta-required-evidence-2026-06-09.pdf">Required Beta evidence packet</a></li>
+      <li><a href="./zgb-beta-additional-security-policies-2026-06-09.pdf">Additional policy evidence packet</a></li>
+      <li><a href="./zgb-security-evidence-2026-05-29.pdf">Prior PDF evidence packet</a></li>
       <li><a href="../privacy/">Privacy Policy</a></li>
       <li><a href="../terms-of-use/">Terms of Use</a></li>
       <li><a href="../documentation/">Documentation</a></li>
