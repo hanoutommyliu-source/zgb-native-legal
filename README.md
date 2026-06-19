@@ -20,5 +20,5 @@ https://github.com/hanoutommyliu-source/zgb-native-legal/releases/download/v0.1.
 
 OAuth redirect URLs:
 
-- Production: https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/production/callback/
+- Production: https://zgb-native-auth.hanou-tommy-liu.workers.dev/auth/zoom/callback
 - Development: https://hanoutommyliu-source.github.io/zgb-native-legal/oauth/development/callback/

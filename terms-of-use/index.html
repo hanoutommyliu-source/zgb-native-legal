@@ -89,7 +89,7 @@
     <main>
       <header>
         <h1>ZGB Native Terms of Use</h1>
-        <p class="updated">Last updated: June 5, 2026</p>
+        <p class="updated">Last updated: June 19, 2026</p>
       </header>
 
       <p>These Terms of Use govern use of ZGB Native, also known as Zoom Game Broadcaster, a macOS app for preparing and sending Zoom breakout-room broadcast messages.</p>
@@ -101,7 +101,7 @@
       <p>ZGB Native requires Zoom authorization and meeting permissions. Some features may only work when the signed-in Zoom user has host, co-host, administrator, or other permissions required by Zoom.</p>
 
       <h2>Local Data</h2>
-      <p>ZGB Native stores app settings, queue content, saved plans, recent broadcast records, and related local configuration on the user's Mac. The production authorization flow does not persist OAuth access or refresh tokens inside the macOS app. If optional local OAuth backend mode is used on macOS for development or diagnostics, Zoom authorization tokens are stored by the local backend in the user's macOS Keychain so the app can join meetings and request Zoom credentials.</p>
+      <p>ZGB Native stores app settings, queue content, saved plans, recent broadcast records, and related local configuration on the user's Mac. The production authorization flow does not persist OAuth access or refresh tokens inside the macOS app. The hosted Cloudflare Worker backend stores Zoom OAuth tokens in Workers KV for the app install's random backend session so it can issue short-lived join credentials. If optional local OAuth backend mode is used on macOS for development or diagnostics, Zoom authorization tokens are stored by the local backend in the user's macOS Keychain so the app can join meetings and request Zoom credentials.</p>
 
       <h2>Prohibited Use</h2>
       <p>Do not use ZGB Native to send unlawful, abusive, misleading, harmful, or unauthorized messages. Do not attempt to bypass Zoom permissions or use the app with accounts, meetings, or data you are not authorized to access.</p>
