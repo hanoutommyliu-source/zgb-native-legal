@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ZGB Native Privacy Policy</title>
-    <meta name="description" content="Privacy Policy for ZGB Native, a macOS app for preparing and sending Zoom breakout-room broadcast messages.">
+    <meta name="description" content="Privacy Policy for ZGB Native, a macOS and Windows app for preparing and sending Zoom breakout-room broadcast messages.">
     <style>
       :root {
         color-scheme: light;
@@ -96,10 +96,10 @@
     <main>
       <header>
         <h1>ZGB Native Privacy Policy</h1>
-        <p class="updated">Last updated: June 19, 2026</p>
+        <p class="updated">Last updated: November 26, 2026</p>
       </header>
 
-      <p>ZGB Native, also known as Zoom Game Broadcaster, is a macOS app for preparing timed Zoom breakout-room broadcast messages and sending them from a queue during a Zoom meeting. This Privacy Policy explains how the app handles information.</p>
+      <p>ZGB Native, also known as Zoom Game Broadcaster, is a macOS and Windows app for preparing timed Zoom breakout-room broadcast messages and sending them from a queue during a Zoom meeting. This Privacy Policy explains how the app handles information.</p>
 
       <h2>Information the App Uses</h2>
       <p>ZGB Native may use the following information to provide its meeting workflow:</p>
@@ -108,22 +108,28 @@
         <li>Meeting details entered by the user, such as meeting number and passcode.</li>
         <li>Broadcast message text, queue timing, saved session plans, and recent broadcast records created by the user.</li>
         <li>Local app configuration, such as selected Zoom connection settings.</li>
+        <li>If the user signs in to the optional shared cue library: the user's Zoom user ID, which Zoom provides after the user authorizes the "View a user" permission, and the cues the user chooses to save (cue name, optional description, and each broadcast's text, timing and notes).</li>
+        <li>On macOS, queues the user chooses to save to the optional iCloud queue library.</li>
+        <li>Diagnostic reports, only when the user reviews the exact text and explicitly chooses to send it.</li>
       </ul>
 
       <h2>How Information Is Used</h2>
       <p>ZGB Native uses this information to authorize with Zoom, join a user-specified Zoom meeting, prepare broadcast queues, send host-controlled breakout-room broadcast messages, store reusable session plans, and show recent broadcast history in the local app.</p>
+      <p>The Zoom user ID is used only to identify who owns each cue in the optional shared cue library, so the same person can use their cues on macOS and Windows. ZGB Native reads it once at library sign-in and does not store the user's name, email address, or other profile details. Diagnostic reports are used only to troubleshoot and improve the app.</p>
 
-      <h2>Local Storage</h2>
-      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and app configuration locally on the user's Mac. The production authorization flow opens Zoom's hosted OAuth authorization page and does not persist OAuth access or refresh tokens inside the macOS app. The hosted Cloudflare Worker backend stores Zoom OAuth tokens in Workers KV for the app install's random backend session so it can issue short-lived join credentials. If the optional local OAuth backend mode is used on macOS for development or diagnostic testing, Zoom OAuth tokens are stored by the local backend in the user's macOS Keychain so the app can request Zoom credentials and join meetings. The app does not intentionally include OAuth tokens, client secrets, meeting passcodes, or private credentials in app packages, source control, support messages, or Marketplace comments.</p>
+      <h2>Storage</h2>
+      <p>ZGB Native stores queue content, saved session plans, recent broadcast records, and app configuration locally on the user's computer. The production authorization flow opens Zoom's hosted OAuth authorization page and does not persist OAuth access or refresh tokens inside the macOS app. The hosted Cloudflare Worker backend stores Zoom OAuth tokens in Workers KV for the app install's random backend session so it can issue short-lived join credentials. If the optional local OAuth backend mode is used on macOS for development or diagnostic testing, Zoom OAuth tokens are stored by the local backend in the user's macOS Keychain so the app can request Zoom credentials and join meetings. The app does not intentionally include OAuth tokens, client secrets, meeting passcodes, or private credentials in app packages, source control, support messages, or Marketplace comments.</p>
+      <p>The optional shared cue library is stored in a Cloudflare D1 database operated by the developer. It holds the user's Zoom user ID, their role in the library, the cues they save, and a one-way hash of their library sign-in credential; the credential itself is kept on the user's device in macOS Keychain or Windows Credential Manager. Diagnostic reports the user chooses to send are stored in the same Cloudflare account. The optional iCloud queue library on macOS uses Apple CloudKit: "My queues" are stored in the user's private iCloud database and "Shared" queues in the app's public CloudKit database.</p>
 
       <h2>Sharing and Disclosure</h2>
-      <p>ZGB Native sends meeting-related requests to Zoom as needed to authorize the app, join meetings, and perform user-directed meeting actions. Broadcast message text is sent to Zoom meeting participants only when the user chooses to send messages through the app. ZGB Native does not sell personal information.</p>
+      <p>ZGB Native sends meeting-related requests to Zoom as needed to authorize the app, join meetings, and perform user-directed meeting actions. Broadcast message text is sent to Zoom meeting participants only when the user chooses to send messages through the app. Cues saved to "My cues" are visible only to their owner. Cues saved to "Shared" are visible to other signed-in ZGB Native users, together with the owner's Zoom user ID, and a library administrator may pin, edit, or remove shared cues. Diagnostic reports can be read in the app only by the developer's verified Zoom account; Cloudflare, as the hosting provider, and the developer's Cloudflare account administrators can technically access stored data. ZGB Native does not sell personal information.</p>
 
       <h2>Retention</h2>
       <p>Local queues, saved plans, recent broadcast records, and configuration remain on the user's Mac until removed by the user or replaced by normal app use. Hosted production OAuth tokens remain in Workers KV for the app install's backend session until cleared or replaced. Deauthorizing the app in Zoom prevents future Zoom access for that account, but it does not automatically delete local files, hosted backend session tokens, or optional local Keychain items already created for the app.</p>
+      <p>Shared cue library entries remain until the user deletes them, or an administrator removes a shared cue. A library sign-in expires after 30 days or when the user signs out. Diagnostic reports are deleted automatically seven days after they are sent.</p>
 
       <h2>User Choices and Data Subject Rights</h2>
-      <p>Users may remove the app from their Zoom account through the Zoom App Marketplace, use <strong>Change Zoom Account</strong> to clear the hosted backend token for this app install's backend session, delete the local macOS app, and delete local app/backend data stored on their Mac, including the ZGB Native OAuth token item in macOS Keychain if optional local backend mode was used. Users may request access, correction, deletion, restriction, objection, or portability for personal information handled by the developer by using the developer contact email listed on the Zoom Marketplace app profile. Available rights depend on applicable law and the user's location.</p>
+      <p>Users may remove the app from their Zoom account through the Zoom App Marketplace, use <strong>Change Zoom Account</strong> to clear the hosted backend token for this app install's backend session, sign out of the shared cue library and delete their saved cues in the app, delete the local app, and delete local app/backend data stored on their computer, including the ZGB Native OAuth token item in macOS Keychain if optional local backend mode was used. Users may request access, correction, deletion, restriction, objection, or portability for personal information handled by the developer by using the developer contact email listed on the Zoom Marketplace app profile. Available rights depend on applicable law and the user's location.</p>
 
       <h2>Security</h2>
       <p>ZGB Native is designed to keep app data local where practical and to use Zoom authorization for Zoom meeting access. Users should not share meeting passcodes, OAuth tokens, client secrets, or private credentials in support tickets or public comments.</p>
